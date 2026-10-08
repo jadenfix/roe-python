@@ -41,6 +41,7 @@ class AgentTag:
             created_at (datetime.datetime):
             creator (int | None):
             usage_count (int): Count of agents using this tag
+            private (bool): Visible only to its owner (the Pinned group).
      """
 
     id: UUID
@@ -49,6 +50,7 @@ class AgentTag:
     created_at: datetime.datetime
     creator: int | None
     usage_count: int
+    private: bool
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -69,6 +71,8 @@ class AgentTag:
 
         usage_count = self.usage_count
 
+        private = self.private
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -79,6 +83,7 @@ class AgentTag:
             "created_at": created_at,
             "creator": creator,
             "usage_count": usage_count,
+            "private": private,
         })
 
         return field_dict
@@ -115,6 +120,8 @@ class AgentTag:
 
         usage_count = d.pop("usage_count")
 
+        private = d.pop("private")
+
         agent_tag = cls(
             id=id,
             name=name,
@@ -122,6 +129,7 @@ class AgentTag:
             created_at=created_at,
             creator=creator,
             usage_count=usage_count,
+            private=private,
         )
 
 
