@@ -9,6 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.agents_list_response_400 import AgentsListResponse400
+from ...models.agents_list_tags_match import AgentsListTagsMatch
 from ...models.error_detail_response import ErrorDetailResponse
 from ...models.paginated_base_agent_list import PaginatedBaseAgentList
 from ...types import UNSET, Unset
@@ -39,6 +40,7 @@ def _get_kwargs(
     page_size: int | Unset = UNSET,
     search: str | Unset = UNSET,
     tags: list[str] | Unset = UNSET,
+    tags_match: AgentsListTagsMatch | Unset = UNSET,
     updated_from: datetime.datetime | Unset = UNSET,
     updated_to: datetime.datetime | Unset = UNSET,
 
@@ -112,6 +114,12 @@ def _get_kwargs(
 
 
     params["tags"] = json_tags
+
+    json_tags_match: str | Unset = UNSET
+    if not isinstance(tags_match, Unset):
+        json_tags_match = tags_match.value
+
+    params["tags_match"] = json_tags_match
 
     json_updated_from: str | Unset = UNSET
     if not isinstance(updated_from, Unset):
@@ -203,6 +211,7 @@ def sync_detailed(
     page_size: int | Unset = UNSET,
     search: str | Unset = UNSET,
     tags: list[str] | Unset = UNSET,
+    tags_match: AgentsListTagsMatch | Unset = UNSET,
     updated_from: datetime.datetime | Unset = UNSET,
     updated_to: datetime.datetime | Unset = UNSET,
 
@@ -230,6 +239,7 @@ def sync_detailed(
         page_size (int | Unset):
         search (str | Unset):
         tags (list[str] | Unset):
+        tags_match (AgentsListTagsMatch | Unset):
         updated_from (datetime.datetime | Unset):
         updated_to (datetime.datetime | Unset):
 
@@ -261,6 +271,7 @@ page=page,
 page_size=page_size,
 search=search,
 tags=tags,
+tags_match=tags_match,
 updated_from=updated_from,
 updated_to=updated_to,
 
@@ -293,6 +304,7 @@ def sync(
     page_size: int | Unset = UNSET,
     search: str | Unset = UNSET,
     tags: list[str] | Unset = UNSET,
+    tags_match: AgentsListTagsMatch | Unset = UNSET,
     updated_from: datetime.datetime | Unset = UNSET,
     updated_to: datetime.datetime | Unset = UNSET,
 
@@ -320,6 +332,7 @@ def sync(
         page_size (int | Unset):
         search (str | Unset):
         tags (list[str] | Unset):
+        tags_match (AgentsListTagsMatch | Unset):
         updated_from (datetime.datetime | Unset):
         updated_to (datetime.datetime | Unset):
 
@@ -352,6 +365,7 @@ page=page,
 page_size=page_size,
 search=search,
 tags=tags,
+tags_match=tags_match,
 updated_from=updated_from,
 updated_to=updated_to,
 
@@ -378,6 +392,7 @@ async def asyncio_detailed(
     page_size: int | Unset = UNSET,
     search: str | Unset = UNSET,
     tags: list[str] | Unset = UNSET,
+    tags_match: AgentsListTagsMatch | Unset = UNSET,
     updated_from: datetime.datetime | Unset = UNSET,
     updated_to: datetime.datetime | Unset = UNSET,
 
@@ -405,6 +420,7 @@ async def asyncio_detailed(
         page_size (int | Unset):
         search (str | Unset):
         tags (list[str] | Unset):
+        tags_match (AgentsListTagsMatch | Unset):
         updated_from (datetime.datetime | Unset):
         updated_to (datetime.datetime | Unset):
 
@@ -436,6 +452,7 @@ page=page,
 page_size=page_size,
 search=search,
 tags=tags,
+tags_match=tags_match,
 updated_from=updated_from,
 updated_to=updated_to,
 
@@ -468,6 +485,7 @@ async def asyncio(
     page_size: int | Unset = UNSET,
     search: str | Unset = UNSET,
     tags: list[str] | Unset = UNSET,
+    tags_match: AgentsListTagsMatch | Unset = UNSET,
     updated_from: datetime.datetime | Unset = UNSET,
     updated_to: datetime.datetime | Unset = UNSET,
 
@@ -495,6 +513,7 @@ async def asyncio(
         page_size (int | Unset):
         search (str | Unset):
         tags (list[str] | Unset):
+        tags_match (AgentsListTagsMatch | Unset):
         updated_from (datetime.datetime | Unset):
         updated_to (datetime.datetime | Unset):
 
@@ -527,6 +546,7 @@ page=page,
 page_size=page_size,
 search=search,
 tags=tags,
+tags_match=tags_match,
 updated_from=updated_from,
 updated_to=updated_to,
 
