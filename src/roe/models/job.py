@@ -215,10 +215,12 @@ class JobBatch:
             status_batch = self.agents_api.jobs.retrieve_status_many(pending_job_ids)
 
             completed_in_this_batch: list[str] = []
+            returned_ids: set[str] = set()
             for status_item in status_batch:
                 job_id = self._extract_id(status_item)
                 if job_id is None:
                     continue
+                returned_ids.add(job_id)
                 stat_code = self._extract_status(status_item)
                 if stat_code in _TERMINAL_STATUSES:
                     completed_in_this_batch.append(job_id)
@@ -228,6 +230,15 @@ class JobBatch:
                         "error_message": self._extract_error_message(status_item),
                         "timestamp": self._extract_timestamp(status_item),
                     }
+
+            # Otherwise a job the server never returns is polled until the timeout.
+            missing = [
+                job_id
+                for job_id in pending_job_ids
+                if str(UUID(str(job_id))) not in returned_ids
+            ]
+            if missing:
+                raise NotFoundError(f"Jobs {missing} not found in status response")
 
             if completed_in_this_batch:
                 result_batch = self.agents_api.jobs.retrieve_result_many(
