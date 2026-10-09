@@ -681,7 +681,10 @@ class AgentsAPI:
                 UUID(str(agent_id)),
                 body=body,
                 organization_id=self._org_id,
-                extra_headers=_build_run_headers(skip_cache=skip_cache),
+                extra_headers={
+                    **(_build_run_headers(skip_cache=skip_cache) or {}),
+                    "x-roe-skip-retry": "1",
+                },
             )
             chunk_ids = response.json()
             if not isinstance(chunk_ids, list):
