@@ -110,7 +110,7 @@ class Job:
             raise ValueError(f"timeout must be positive, got {timeout}")
 
         effective_timeout = timeout if timeout is not None else self._timeout_seconds
-        start_time = time.time()
+        deadline = time.monotonic() + effective_timeout
 
         from roe._generated.types import Unset
 
@@ -132,12 +132,13 @@ class Job:
                     return _empty_result(status.status, error_message)
                 return _attach_status(result, status.status, error_message)
 
-            if (time.time() - start_time) > effective_timeout:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
                 raise TimeoutError(
                     f"Job {self._job_id} did not complete within {effective_timeout} seconds"
                 )
 
-            time.sleep(interval)
+            time.sleep(min(interval, remaining))
 
     def retrieve_status(self) -> AgentJobSingleStatus:
         """Generated ``AgentJobSingleStatus`` for the job."""
@@ -201,7 +202,7 @@ class JobBatch:
             raise ValueError(f"timeout must be positive, got {timeout}")
 
         effective_timeout = timeout if timeout is not None else self._timeout_seconds
-        start_time = time.time()
+        deadline = time.monotonic() + effective_timeout
 
         while len(self._completed_jobs) < len(self._job_ids):
             pending_job_ids = [
@@ -249,7 +250,8 @@ class JobBatch:
                     self._completed_jobs[job_id] = result_item
 
             if len(self._completed_jobs) < len(self._job_ids):
-                if (time.time() - start_time) > effective_timeout:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
                     if raise_on_timeout:
                         remaining = set(self._job_ids) - set(self._completed_jobs)
                         raise TimeoutError(
@@ -257,7 +259,7 @@ class JobBatch:
                         )
                     break
 
-                time.sleep(interval)
+                time.sleep(min(interval, remaining))
 
         return [self._completed_jobs.get(job_id) for job_id in self._job_ids]
 
