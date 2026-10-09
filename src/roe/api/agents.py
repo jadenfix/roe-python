@@ -350,8 +350,6 @@ class AgentJobsAPI:
         results: list[AgentJobStatus] = []
         is_first_chunk = True
         for chunk in self._iter_chunks(job_ids, self._MAX_BATCH_SIZE):
-            if not chunk:
-                continue
             if not is_first_chunk:
                 time.sleep(self._agents_api.config.batch_chunk_delay)
             is_first_chunk = False
@@ -375,8 +373,6 @@ class AgentJobsAPI:
         results: list[Any] = []
         is_first_chunk = True
         for chunk in self._iter_chunks(job_ids, self._MAX_BATCH_SIZE):
-            if not chunk:
-                continue
             if not is_first_chunk:
                 time.sleep(self._agents_api.config.batch_chunk_delay)
             is_first_chunk = False
@@ -667,8 +663,6 @@ class AgentsAPI:
         all_job_ids: list[str] = []
         is_first_chunk = True
         for chunk in self._iter_chunks(batch_inputs, self._MAX_BATCH_SIZE):
-            if not chunk:
-                continue
             if not is_first_chunk:
                 time.sleep(self.config.batch_chunk_delay)
             is_first_chunk = False
