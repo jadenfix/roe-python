@@ -4,7 +4,7 @@ import mimetypes
 import os
 from typing import BinaryIO
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class FileUpload(BaseModel):
@@ -17,8 +17,7 @@ class FileUpload(BaseModel):
         default=None, description="MIME type (auto-detected if not provided)"
     )
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     @model_validator(mode="after")
     def validate_file_source(self):
