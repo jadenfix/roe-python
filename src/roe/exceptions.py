@@ -115,6 +115,10 @@ def translate_response(response: Any) -> None:
 
     if isinstance(body, dict):
         message = body.get("detail") or body.get("error") or body.get("message")
+        if isinstance(message, list):
+            message = "; ".join(str(e) for e in message)
+        elif message and not isinstance(message, str):
+            message = str(message)
         if not message:
             for value in body.values():
                 if isinstance(value, list) and value:
