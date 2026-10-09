@@ -157,6 +157,7 @@ def test_run_many_sends_skip_cache_header_on_every_chunk():
     assert request.call_count == 2
     for call in request.call_args_list:
         assert call.kwargs["headers"]["X-Skip-Cache"] == "true"
+        assert call.kwargs["headers"]["x-roe-skip-retry"] == "1"
 
 
 def test_sync_and_version_runs_omit_skip_cache_header_by_default():
