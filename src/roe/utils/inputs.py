@@ -42,8 +42,17 @@ def build_execution_multipart(
 
     for key, value in inputs.items():
         if isinstance(value, FileUpload):
-            filename, file_obj, mime_type = value.to_multipart_tuple()
-            files[key] = (filename, file_obj, mime_type)
+            if value.path:
+                # Read now so the handle is closed; nothing closes it after the request.
+                with open(value.path, "rb") as fh:
+                    files[key] = (
+                        value.effective_filename,
+                        fh.read(),
+                        value.effective_mime_type,
+                    )
+            else:
+                filename, file_obj, mime_type = value.to_multipart_tuple()
+                files[key] = (filename, file_obj, mime_type)
         elif isinstance(value, (io.IOBase, io.BytesIO)) or hasattr(value, "read"):
             files[key] = value
         elif isinstance(value, str):
