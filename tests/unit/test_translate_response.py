@@ -66,6 +66,19 @@ def test_list_body_joined_as_message():
     assert exc_info.value.response is None
 
 
+@pytest.mark.parametrize(
+    "content,expected",
+    [
+        (b'{"detail": ["a", "b"]}', "a; b"),
+        (b'{"error": {"code": "bad"}}', "{'code': 'bad'}"),
+    ],
+)
+def test_non_string_detail_becomes_string_message(content, expected):
+    with pytest.raises(BadRequestError) as exc_info:
+        translate_response(_resp(400, content))
+    assert exc_info.value.message == expected
+
+
 def test_non_json_body_falls_back_to_status_snippet():
     with pytest.raises(NotFoundError) as exc_info:
         translate_response(_resp(404, b"<html>not found</html>"))
