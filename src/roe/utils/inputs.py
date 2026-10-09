@@ -65,6 +65,8 @@ def build_execution_multipart(
                     files[key] = (p.name, fh.read(), mime or "application/octet-stream")
             else:
                 form_data[key] = value
+        elif isinstance(value, (dict, list)):
+            form_data[key] = _json.dumps(value)
         else:
             if value is not None:
                 form_data[key] = str(value)
