@@ -4,14 +4,17 @@ import mimetypes
 import os
 from typing import BinaryIO
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, SkipValidation, model_validator
 
 
 class FileUpload(BaseModel):
     """Helper class for explicit file uploads with metadata."""
 
     path: str | None = Field(default=None, description="File path to upload")
-    file_obj: BinaryIO | None = Field(default=None, description="File object to upload")
+    # SkipValidation: real file objects aren't isinstance(BinaryIO), so validation rejects them.
+    file_obj: SkipValidation[BinaryIO] | None = Field(
+        default=None, description="File object to upload"
+    )
     filename: str | None = Field(default=None, description="Override filename")
     mime_type: str | None = Field(
         default=None, description="MIME type (auto-detected if not provided)"
