@@ -33,6 +33,7 @@ def _get_kwargs(
     ordering: list[AgentsJobsListOrderingItem] | Unset = UNSET,
     page: int | Unset = UNSET,
     page_size: int | Unset = UNSET,
+    review_state: str | Unset = UNSET,
     search: str | Unset = UNSET,
     semantic_string: str | Unset = UNSET,
     status_code: str | Unset = UNSET,
@@ -80,6 +81,8 @@ def _get_kwargs(
     params["page"] = page
 
     params["page_size"] = page_size
+
+    params["review_state"] = review_state
 
     params["search"] = search
 
@@ -169,6 +172,7 @@ def sync_detailed(
     ordering: list[AgentsJobsListOrderingItem] | Unset = UNSET,
     page: int | Unset = UNSET,
     page_size: int | Unset = UNSET,
+    review_state: str | Unset = UNSET,
     search: str | Unset = UNSET,
     semantic_string: str | Unset = UNSET,
     status_code: str | Unset = UNSET,
@@ -193,6 +197,7 @@ def sync_detailed(
         ordering (list[AgentsJobsListOrderingItem] | Unset):
         page (int | Unset):
         page_size (int | Unset):
+        review_state (str | Unset):
         search (str | Unset):
         semantic_string (str | Unset):
         status_code (str | Unset):
@@ -221,6 +226,7 @@ metadata=metadata,
 ordering=ordering,
 page=page,
 page_size=page_size,
+review_state=review_state,
 search=search,
 semantic_string=semantic_string,
 status_code=status_code,
@@ -250,6 +256,7 @@ def sync(
     ordering: list[AgentsJobsListOrderingItem] | Unset = UNSET,
     page: int | Unset = UNSET,
     page_size: int | Unset = UNSET,
+    review_state: str | Unset = UNSET,
     search: str | Unset = UNSET,
     semantic_string: str | Unset = UNSET,
     status_code: str | Unset = UNSET,
@@ -274,6 +281,7 @@ def sync(
         ordering (list[AgentsJobsListOrderingItem] | Unset):
         page (int | Unset):
         page_size (int | Unset):
+        review_state (str | Unset):
         search (str | Unset):
         semantic_string (str | Unset):
         status_code (str | Unset):
@@ -303,6 +311,7 @@ metadata=metadata,
 ordering=ordering,
 page=page,
 page_size=page_size,
+review_state=review_state,
 search=search,
 semantic_string=semantic_string,
 status_code=status_code,
@@ -326,6 +335,7 @@ async def asyncio_detailed(
     ordering: list[AgentsJobsListOrderingItem] | Unset = UNSET,
     page: int | Unset = UNSET,
     page_size: int | Unset = UNSET,
+    review_state: str | Unset = UNSET,
     search: str | Unset = UNSET,
     semantic_string: str | Unset = UNSET,
     status_code: str | Unset = UNSET,
@@ -350,6 +360,7 @@ async def asyncio_detailed(
         ordering (list[AgentsJobsListOrderingItem] | Unset):
         page (int | Unset):
         page_size (int | Unset):
+        review_state (str | Unset):
         search (str | Unset):
         semantic_string (str | Unset):
         status_code (str | Unset):
@@ -378,6 +389,7 @@ metadata=metadata,
 ordering=ordering,
 page=page,
 page_size=page_size,
+review_state=review_state,
 search=search,
 semantic_string=semantic_string,
 status_code=status_code,
@@ -407,6 +419,7 @@ async def asyncio(
     ordering: list[AgentsJobsListOrderingItem] | Unset = UNSET,
     page: int | Unset = UNSET,
     page_size: int | Unset = UNSET,
+    review_state: str | Unset = UNSET,
     search: str | Unset = UNSET,
     semantic_string: str | Unset = UNSET,
     status_code: str | Unset = UNSET,
@@ -431,6 +444,7 @@ async def asyncio(
         ordering (list[AgentsJobsListOrderingItem] | Unset):
         page (int | Unset):
         page_size (int | Unset):
+        review_state (str | Unset):
         search (str | Unset):
         semantic_string (str | Unset):
         status_code (str | Unset):
@@ -460,6 +474,7 @@ metadata=metadata,
 ordering=ordering,
 page=page,
 page_size=page_size,
+review_state=review_state,
 search=search,
 semantic_string=semantic_string,
 status_code=status_code,
