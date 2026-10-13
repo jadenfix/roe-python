@@ -31,6 +31,7 @@ class SkillSetGenerationRun:
             sse_endpoint (str): SSE endpoint URL for real-time status updates
             id (UUID):
             status (str): building, succeeded, or failed.
+            error (str): Why the run failed, when it reported a reason.
             started_at (datetime.datetime): When the run started — the UI shows elapsed time from this.
      """
 
@@ -38,6 +39,7 @@ class SkillSetGenerationRun:
     sse_endpoint: str
     id: UUID
     status: str
+    error: str
     started_at: datetime.datetime
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -54,6 +56,8 @@ class SkillSetGenerationRun:
 
         status = self.status
 
+        error = self.error
+
         started_at = self.started_at.isoformat()
 
 
@@ -64,6 +68,7 @@ class SkillSetGenerationRun:
             "sse_endpoint": sse_endpoint,
             "id": id,
             "status": status,
+            "error": error,
             "started_at": started_at,
         })
 
@@ -85,6 +90,8 @@ class SkillSetGenerationRun:
 
         status = d.pop("status")
 
+        error = d.pop("error")
+
         started_at = isoparse(d.pop("started_at"))
 
 
@@ -95,6 +102,7 @@ class SkillSetGenerationRun:
             sse_endpoint=sse_endpoint,
             id=id,
             status=status,
+            error=error,
             started_at=started_at,
         )
 

@@ -8,6 +8,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..models.review_state_enum import ReviewStateEnum
 from ..types import UNSET, Unset
 from dateutil.parser import isoparse
 from typing import cast
@@ -47,6 +48,9 @@ class ListAgentJob:
             ui_fields (Any): Denormalized fields from agent output for list/metrics without loading S3
             evaluation (AgentJobEvaluation | None):
             feedback_review (AgentJobFeedbackNested | None):
+            review_state (ReviewStateEnum): * `unreviewed` - Unreviewed
+                * `agreed` - Agreed
+                * `disagreed` - Disagreed
             creator (None | UserInfo):
             job_inputs (list[JobInput] | Unset): List of input data provided to the agent job
             metadata (ListAgentJobMetadata | Unset): Key-value pairs of metadata associated with the job
@@ -62,6 +66,7 @@ class ListAgentJob:
     ui_fields: Any
     evaluation: AgentJobEvaluation | None
     feedback_review: AgentJobFeedbackNested | None
+    review_state: ReviewStateEnum
     creator: None | UserInfo
     job_inputs: list[JobInput] | Unset = UNSET
     metadata: ListAgentJobMetadata | Unset = UNSET
@@ -113,6 +118,8 @@ class ListAgentJob:
         else:
             feedback_review = self.feedback_review
 
+        review_state = self.review_state.value
+
         creator: dict[str, Any] | None
         if isinstance(self.creator, UserInfo):
             creator = self.creator.to_dict()
@@ -146,6 +153,7 @@ class ListAgentJob:
             "ui_fields": ui_fields,
             "evaluation": evaluation,
             "feedback_review": feedback_review,
+            "review_state": review_state,
             "creator": creator,
         })
         if job_inputs is not UNSET:
@@ -247,6 +255,11 @@ class ListAgentJob:
         feedback_review = _parse_feedback_review(d.pop("feedback_review"))
 
 
+        review_state = ReviewStateEnum(d.pop("review_state"))
+
+
+
+
         def _parse_creator(data: object) -> None | UserInfo:
             if data is None:
                 return data
@@ -298,6 +311,7 @@ class ListAgentJob:
             ui_fields=ui_fields,
             evaluation=evaluation,
             feedback_review=feedback_review,
+            review_state=review_state,
             creator=creator,
             job_inputs=job_inputs,
             metadata=metadata,
