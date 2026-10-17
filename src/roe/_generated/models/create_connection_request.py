@@ -54,6 +54,8 @@ class CreateConnectionRequest:
                 * `socure` - SOCURE
                 * `custom_mcp` - CUSTOM_MCP
                 * `metabase` - METABASE
+                * `slack` - SLACK
+                * `smtp` - SMTP
             name (str):
             config (CreateConnectionRequestConfig):
             description (str | Unset):

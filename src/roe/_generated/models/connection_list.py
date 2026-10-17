@@ -29,7 +29,7 @@ T = TypeVar("T", bound="ConnectionList")
 @_attrs_define
 class ConnectionList:
     """ Lightweight serializer for listing connections.
-    Only returns metadata, no auth_config (avoids Secrets Manager calls).
+    Returns metadata without fetching credentials from Secrets Manager.
 
         Attributes:
             id (UUID):

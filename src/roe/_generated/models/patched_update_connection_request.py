@@ -28,11 +28,10 @@ T = TypeVar("T", bound="PatchedUpdateConnectionRequest")
 class PatchedUpdateConnectionRequest:
     """ Serializer for updating connections.
 
-    Cross-state Pydantic validation (config + auth) lives in the view's
-    ``update()`` method now -- see ``connections.views.
-    ConnectionRetrieveUpdateDestroyView.update``. That path is the single
-    source of truth for canonical validation + write, mirrors the create
-    path's ``service.create_connection_with_secrets``, AND correctly
+    Cross-state Pydantic validation (config + auth) lives in
+    ``connections.services.connection.update_connection_with_secrets``. That
+    path is the single source of truth for canonical validation + write,
+    mirrors the create path's ``create_connection_with_secrets``, AND correctly
     handles the SM-fetch-failure case for the unchanged-auth branch
     (returns 502 / opportunistic backfill instead of silently corrupting
     the fingerprint by hashing ``{}``). Re-running the same validation

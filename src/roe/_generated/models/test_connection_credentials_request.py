@@ -52,6 +52,8 @@ class TestConnectionCredentialsRequest:
                 * `socure` - SOCURE
                 * `custom_mcp` - CUSTOM_MCP
                 * `metabase` - METABASE
+                * `slack` - SLACK
+                * `smtp` - SMTP
             config (TestConnectionCredentialsRequestConfig):
             auth_config (TestConnectionCredentialsRequestAuthConfig | Unset):
             dynamic_inputs (TestConnectionCredentialsRequestDynamicInputs | Unset):
