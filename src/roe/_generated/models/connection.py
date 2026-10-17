@@ -32,7 +32,7 @@ class Connection:
     """ Serializer for Connection model.
     Returns:
     - config: Non-sensitive config from DB
-    - auth_config: Actual auth credentials from Secrets Manager (not the internal reference)
+    - auth_config: Manual credentials, or safe metadata for managed Zendesk OAuth
 
         Attributes:
             id (UUID):

@@ -18,6 +18,8 @@ class ConnectorTypeEnum(str, Enum):
     SHIELD = "shield"
     SIFT = "sift"
     SIFT_API = "sift_api"
+    SLACK = "slack"
+    SMTP = "smtp"
     SNOWFLAKE = "snowflake"
     SOCURE = "socure"
     STRIPE = "stripe"
